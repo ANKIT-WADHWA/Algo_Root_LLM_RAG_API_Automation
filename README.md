@@ -100,20 +100,20 @@ curl -X POST "http://127.0.0.1:8000/execute" -H "Content-Type: application/json"
 ## 📷 Screenshots
 ### 1️. Opening Chrome Browser
 
-![Chrome](image.png)
+![Chrome](Screenshots/image.png)
 
 
 ### 2️. List files 
 
-![List](D:\LLM_Task\Screenshots\image2.png)
+![List](Screenshots/image2.png)
 
 
 
 ### 2️⃣ Check CPU Usage
 
-![List](image3.png)
+![List](Screenshots/image3.png)
 
 
 
 ### Final Results of All
-![Fianl](D:\LLM_Task\Screenshots\final.png)
+![Fianl](Screenshots/final.png)
