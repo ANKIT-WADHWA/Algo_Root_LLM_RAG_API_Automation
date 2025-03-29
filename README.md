@@ -5,10 +5,15 @@ This repository contains a **Python-based API service** that dynamically retriev
 
 ## 🛠 Features
 **✅Function Registry** – Predefined automation functions, including:
+
     **Application Control**: Open Chrome, Calculator, Notepad, etc.
+	 
     **System Monitoring**: Retrieve CPU & RAM usage.
+	 
     **Command Execution**: Run shell commands.
+	 
     **File Management**: List files in a directory.
+	 
 
 
 **✅LLM + RAG** for Function Retrieval – Uses a vector database (ChromaDB/FAISS) to map user prompts to the best-matching function.
