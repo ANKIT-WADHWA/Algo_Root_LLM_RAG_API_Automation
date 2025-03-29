@@ -73,15 +73,47 @@ curl -X POST "http://127.0.0.1:8000/execute" -H "Content-Type: application/json"
 {
   "function": "list_files",
   "output": "Files in '.': .git, .gitignore, api.py, api_logs.log, app.log, automation_functions.py, check.py, code_generator.py, function_db, function_registry.py, generated_script.py, README.md, requirements.txt, venv, __pycache__",
-  "code": "\nfrom automation import open_chrome\n\ndef main():\n    try:\n        result = open_chrome()\n        if result:\n            print(result)\n        else:\n            print(\"open_chrome executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing function: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n",
+  "code": "\nfrom automation import list_files\n\ndef main():\n    try:\n        result = list_files()\n        if result:\n            print(result)\n        else:\n            print(\"list_files executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing function: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n    ",
   "session_history": ["Open Chrome","List Files"]
 }
 
 ```
 
 
+#### **Request:**
+```
+curl -X POST "http://127.0.0.1:8000/execute" -H "Content-Type: application/json" -d "{\"prompt\": \"Check CPU usage\", \"session_id\": \"test1\"}"
+
+
+```
+
+#### **Response:**
+```json
+{
+  "function": "get_cpu_usage",
+  "output": "CPU Usage: 11.0%",
+  "code": "\nfrom automation import get_cpu_usage\n\ndef main():\n    try:\n        result = get_cpu_usage()\n        if result:\n            print(result)\n        else:\n            print(\"get_cpu_usage executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing function: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n      ",
+  "session_history": ["Open Chrome","List Files","Check CPU usage"]
+}
+
+```
 ## 📷 Screenshots
-### 1️⃣ Opening Chrome Browser
+### 1️. Opening Chrome Browser
+
+![Chrome](image.png)
 
 
-### 2️⃣ List files and directories in specified path
+### 2️. List files 
+
+![List](D:\LLM_Task\Screenshots\image2.png)
+
+
+
+### 2️⃣ Check CPU Usage
+
+![List](image3.png)
+
+
+
+### Final Results of All
+![Fianl](D:\LLM_Task\Screenshots\final.png)
