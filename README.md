@@ -1,59 +1,87 @@
-# 🚀 LLM + RAG-Powered Automation API
+# LLM + RAG-Based Function Execution API    
 
 ## 📌 Overview
-This project is a Python-based API service that dynamically retrieves and executes automation functions using **LLM + RAG (Retrieval-Augmented Generation)**. It processes user prompts, maps them to predefined automation functions, and generates executable Python code for function invocation.
+This repository contains a **Python-based API service** that dynamically retrieves and executes automation functions using **LLM + RAG (Retrieval-Augmented Generation)**. The system processes user prompts, maps them to predefined automation functions, and generates executable Python code for function invocation.
 
 ## 🛠 Features
-- **Function Registry**: Predefined automation functions like opening apps, retrieving system stats, and running shell commands.
-- **LLM + RAG for Function Retrieval**: Uses a vector database (ChromaDB) to map user prompts to the best-matching function.
-- **Dynamic Code Generation**: Generates Python scripts for execution based on retrieved functions.
-- **Session-based Context**: Enhances retrieval accuracy by maintaining session memory.
-- **Direct Execution Option**: Allows executing the retrieved function directly from the API.
+**✅Function Registry** – Predefined automation functions, including:
+    **Application Control**: Open Chrome, Calculator, Notepad, etc.
+    **System Monitoring**: Retrieve CPU & RAM usage.
+    **Command Execution**: Run shell commands.
+    **File Management**: List files in a directory.
+
+
+**✅LLM + RAG** for Function Retrieval – Uses a vector database (ChromaDB/FAISS) to map user prompts to the best-matching function.
+
+**✅Dynamic Code Generation**– Generates Python scripts for execution based on retrieved functions.
+
+**✅ Session-based Context** – Enhances retrieval accuracy by maintaining session memory.
+
+**✅ API Service Implementation** – Exposes a REST API endpoint for function execution.
+
+
 
 ## 🚀 Installation & Setup
 ### 1️⃣ Clone the Repository
 ```sh
-$ git clone https://github.com/your-username/AlgoRoot-automation-api.git
-$ cd AlgoRoot-automation-api
+$ git clone https://github.com/your-username/AlgoRoot-automation-api.git  
+$ cd AlgoRoot-automation-api  
+
 ```
 
 ### 2️⃣ Create a Virtual Environment & Install Dependencies
 ```sh
 $ python -m venv venv
-$ source venv/bin/activate  # On Windows: venv\Scripts\activate
+$ On Windows: venv\Scripts\activate
 $ pip install -r requirements.txt
 ```
 
 ### 3️⃣ Run the API Server
 ```sh
-$ uvicorn main:app --reload
+$ uvicorn api:app --reload
 ```
 
 ## 📡 API Endpoints
 ### 🔹 Execute an Automation Function
 #### **Request:**
-```http
-POST /execute
 ```
-##### **Request Body:**
-```json
-{
-  "prompt": "Open calculator",
-  "session_id": "user123"
-}
+curl -X POST "http://127.0.0.1:8000/execute" -H "Content-Type: application/json" -d "{\"prompt\": \"Open Chrome\", \"session_id\": \"test1\"}"
+
+
 ```
+
 #### **Response:**
 ```json
 {
-  "function": "open_calculator",
-  "code": "from automation_functions import open_calculator\ndef main():\n    try:\n        open_calculator()\n        print(\"Calculator opened successfully.\")\n    except Exception as e:\n        print(f\"Error executing function: {e}\")\nif __name__ == \"__main__\":\n    main()",
+  "function": "open_chrome",
+  "output": "Executed Successfully",
+  "code": "\nfrom automation import open_chrome\n\ndef main():\n    try:\n        result = open_chrome()\n        if result:\n            print(result)\n        else:\n            print(\"open_chrome executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing function: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n",
+  "session_history": ["Open Chrome"]
 }
+
+```
+
+#### **Request:**
+```
+curl -X POST "http://127.0.0.1:8000/execute" -H "Content-Type: application/json" -d "{\"prompt\": \"List files\", \"session_id\": \"test1\"}"
+
+
+```
+
+#### **Response:**
+```json
+{
+  "function": "list_files",
+  "output": "Files in '.': .git, .gitignore, api.py, api_logs.log, app.log, automation_functions.py, check.py, code_generator.py, function_db, function_registry.py, generated_script.py, README.md, requirements.txt, venv, __pycache__",
+  "code": "\nfrom automation import open_chrome\n\ndef main():\n    try:\n        result = open_chrome()\n        if result:\n            print(result)\n        else:\n            print(\"open_chrome executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing function: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n",
+  "session_history": ["Open Chrome","List Files"]
+}
+
 ```
 
 
 ## 📷 Screenshots
 ### 1️⃣ Opening Chrome Browser
-![Postman Request](screenshots/1.png)
+
 
 ### 2️⃣ List files and directories in specified path
-![Terminal Output](screenshots/2.png)
